@@ -13,4 +13,8 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
+task :serve do
+  exec "bin/server"
+end
+
 task default: %i[test rubocop]

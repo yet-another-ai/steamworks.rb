@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "steamworks"
+require "sinatra"
+require "rack/cors"
+
+set :bind, "0.0.0.0"
+set :port, 8080
+
+use Rack::Cors do
+  allow do
+    origins "https://hoppscotch.io"
+    resource "*", headers: :any, methods: %i[get post]
+  end
+end
+
+steamworks_api = Steamworks::API.new
+steamworks_api.configure do |config|
+  config.key = "your_steam_web_api_key"
+  config.appid = "your_steam_app_id"
+  config.identity = "your_steam_identity"
+end
+
+get "/api/authenticate_user_ticket" do
+  steamworks_api.authenticate_user_ticket(ticket: params[:ticket]).to_json
+rescue StandardError => e
+  { error: e.message }.to_json
+end
