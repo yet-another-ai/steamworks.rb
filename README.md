@@ -12,16 +12,16 @@ Steamworks Web API client for Ruby.
 ## Example
 
 ```ruby
-require 'steamworks'
+require "steamworks"
 
-api = Steamworks::API.new
-
-api.configure do |config|
-  config.key = "your_steam_web_api_key"
-  config.appid = "your_steam_app_id"
-  config.identity = "your_steam_identity"
+class Steamworks::Configure
+  set :key, "key"
+  set :appid, "appid"
+  set :identity, "identity"
 end
 
-puts api.authenticate_user_ticket(ticket: "ticket")
+steamworks_api = Steamworks::API.new
+
+steamworks_api.authenticate_user_ticket(ticket: params[:ticket]).to_json
 
 ```
