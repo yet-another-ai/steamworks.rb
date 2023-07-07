@@ -16,12 +16,15 @@ use Rack::Cors do
   end
 end
 
-steamworks_api = Steamworks::API.new
-steamworks_api.configure do |config|
-  config.key = "your_steam_web_api_key"
-  config.appid = "your_steam_app_id"
-  config.identity = "your_steam_identity"
+module Steamworks
+  class Configure
+    set :key, "key"
+    set :appid, "appid"
+    set :identity, "identity"
+  end
 end
+
+steamworks_api = Steamworks::API.new
 
 get "/api/authenticate_user_ticket" do
   steamworks_api.authenticate_user_ticket(ticket: params[:ticket]).to_json

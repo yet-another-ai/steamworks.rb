@@ -2,12 +2,14 @@
 
 module Steamworks
   class API
-    include Steamworks::Configureable
-    attr_accessor :key, :appid, :identity
-
     def initialize
       @partner_conn = Steamworks::Connection.new(gateway: :partner)
       @public_conn = Steamworks::Connection.new(gateway: :public)
+
+      config = Steamworks::Configure
+      @key = config.key
+      @appid = config.appid
+      @identity = config.identity
     end
 
     # https://partner.steamgames.com/doc/webapi/ISteamUserAuth#AuthenticateUserTicket
