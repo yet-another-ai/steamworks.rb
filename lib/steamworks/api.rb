@@ -6,7 +6,7 @@ module Steamworks
       @partner_conn = Steamworks::Connection.new(gateway: :partner)
       @public_conn = Steamworks::Connection.new(gateway: :public)
 
-      config = Steamworks::Configure
+      config = Steamworks::Config.new
       @key = config.key
       @appid = config.appid
       @identity = config.identity
