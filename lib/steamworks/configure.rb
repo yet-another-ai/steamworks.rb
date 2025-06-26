@@ -7,5 +7,6 @@ module Steamworks
     set :key, "key"
     set :appid, "appid"
     set :identity, "identity"
+    set :sandbox, false
   end
 end
